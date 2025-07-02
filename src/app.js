@@ -11,50 +11,37 @@ const url = `${BASE_URL}/chat`;
 
 function createMessageBubble(content, sender = "user") {
   const wrapper = document.createElement("div");
-  wrapper.classList.add("mb-6", "flex", "items-start", "space-x-3");
 
-  const avatar = document.createElement("div");
-  avatar.classList.add(
-    "w-10",
-    "h-10",
-    "rounded-full",
-    "flex-shrink-0",
-    "flex",
-    "items-center",
-    "justify-center",
-    "font-bold",
-    "text-white"
-  );
-
-  if (sender === "assistant") {
-    avatar.classList.add("bg-gradient-to-br", "from-green-400", "to-green-600");
-    avatar.textContent = "A";
+  if (sender === "user") {
+    wrapper.className = "mb-6 flex flex-row-reverse items-start justify-end space-x-3 space-x-reverse";
   } else {
-    avatar.classList.add("bg-gradient-to-br", "from-blue-500", "to-blue-700");
-    avatar.textContent = "U";
+    wrapper.className = "mb-6 flex items-start justify-start space-x-3";
   }
 
   const bubble = document.createElement("div");
-  bubble.classList.add(
-    "max-w-full",
-    "md:max-w-2xl",
-    "p-3",
-    "rounded-lg",
-    "whitespace-pre-wrap",
-    "leading-relaxed",
-    "shadow-sm"
-  );
-
-  if (sender === "assistant") {
-    bubble.classList.add("bg-gray-200", "text-gray-900");
+  bubble.className = "max-w-full md:max-w-2xl p-3 rounded-lg whitespace-pre-wrap leading-relaxed shadow-sm";
+  if (sender === "user") {
+    bubble.classList.add("bg-gray-200", "text-gray-900", "ml-auto");
   } else {
-    bubble.classList.add("bg-blue-600", "text-white");
+    bubble.classList.add("bg-pink-600", "text-white");
   }
-
   bubble.textContent = content;
 
+if (sender === "assistant") {
+  const avatar = document.createElement("div");
+  avatar.className =
+    "w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold bg-gradient-to-br from-green-400 to-green-600 overflow-hidden";
+  const img = document.createElement("img");
+  img.src = "./src/assets/avatar.jpg";
+  img.alt = "avatar";
+  img.className = "w-full h-full object-cover";
+  avatar.appendChild(img);
   wrapper.appendChild(avatar);
   wrapper.appendChild(bubble);
+} else {
+  wrapper.appendChild(bubble);
+}
+
   return wrapper;
 }
 
@@ -62,7 +49,7 @@ function scrollToBottom() {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-async function getAssistantResponse(userMessage) {
+async function getAssistantResponse(userMessage, codeLanguage) {
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -109,4 +96,11 @@ messageForm.addEventListener("submit", async (e) => {
     );
     scrollToBottom();
   }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  chatContainer.appendChild(
+    createMessageBubble('안녕하세요. 당신의 코드를 트렌드하게 바꿔줄 "델타캐처"입니다!', "assistant")
+  );
+  scrollToBottom();
 });
