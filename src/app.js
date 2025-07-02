@@ -19,7 +19,7 @@ function createMessageBubble(content, sender = "user") {
   }
 
   const bubble = document.createElement("div");
-  bubble.className = "max-w-full md:max-w-2xl p-3 rounded-lg whitespace-pre-wrap leading-relaxed shadow-sm";
+  bubble.className = "max-w-full md:max-w-2xl p-3 rounded-lg whitespace-pre-wrap leading-relaxed shadow-sm bubble-appear";
   if (sender === "user") {
     bubble.classList.add("bg-gray-200", "text-gray-900", "ml-auto");
   } else {
@@ -41,6 +41,9 @@ if (sender === "assistant") {
 } else {
   wrapper.appendChild(bubble);
 }
+  setTimeout(() => {
+    bubble.classList.add("bubble-appear-active");
+  }, 10);
 
   return wrapper;
 }

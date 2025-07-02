@@ -14,7 +14,15 @@
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-
+.bubble-appear {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.bubble-appear-active {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* Additional custom styles if needed */
 body {
