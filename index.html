@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최신 버전 코드 서포트 챗봇</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/front.4d663569.css">
+</head>
+
+<body class="h-screen flex flex-col bg-gray-100">
+    <!-- Header -->
+    <header class="p-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white flex items-center justify-between">
+        <h1 class="text-xl font-semibold">최신 버전 코드 서포트 챗봇</h1>
+        <span class="text-sm opacity-90">RAG 대전 1팀</span>
+    </header>
+
+    <!-- Main chat area -->
+    <main id="chat-container" class="flex-1 overflow-y-auto p-4 chat-scroll">
+        <!-- Messages will be dynamically inserted here -->
+    </main>
+
+    <!-- Input area with endpoint selector -->
+    <footer class="border-t border-gray-300 bg-white p-4">
+        <form id="message-form" class="flex items-center space-x-2">
+            <select id="language-selector" class="h-10 px-3 text-base border border-gray-300 rounded-md focus:border-pink-500 focus:outline-none">
+            <option value="" disabled="" selected="">---언어를 선택하세요---</option>
+            <option value="django">Django</option>
+            <option value="python">Python</option>
+            <option value="nodejs">Node.js</option>
+            </select>
+            <input type="text" id="user-input" class="h-10 flex-1 px-3 text-base border border-gray-300 rounded-md outline-none focus:border-pink-500" placeholder="질문 내용을 입력해주세요." required="">
+            <button type="submit" class="h-10 px-4 text-base bg-pink-600 text-white rounded-md hover:bg-pink-700 transition">
+            질문하기
+            </button>
+        </form>
+    </footer>
+
+
+    <script type="module" src="/front.0f77c784.js"></script>
+
+
+</body></html>
