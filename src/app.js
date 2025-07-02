@@ -15,27 +15,26 @@ function createMessageBubble(content, sender = "user") {
   const wrapper = document.createElement("div");
 
   if (sender === "user") {
-    wrapper.className = "mb-6 flex flex-row-reverse items-start justify-end space-x-3 space-x-reverse";
+    wrapper.className = "mb-6 mr-6 flex flex-row-reverse items-end justify-end space-x-3 space-x-reverse";
   } else {
     wrapper.className = "mb-6 flex items-start justify-start space-x-3";
   }
 
   const bubble = document.createElement("div");
   bubble.className =
-    "bubble-cute-tail " +
     (sender === "user" ? "user " : "assistant ") +
-    "max-w-full md:max-w-2xl p-4 rounded-3xl whitespace-pre-wrap leading-relaxed shadow-lg bubble-appear font-semibold text-base";
+    "max-w-[60%] p-3 rounded-3xl whitespace-pre-wrap leading-relaxed shadow-lg bubble-appear font-semibold text-base";
   if (sender === "user") {
     bubble.classList.add("bg-gray-200", "text-pink-500", "ml-auto");
   } else {
-    bubble.classList.add("bg-pink-400", "text-white");
+  bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
   }
   bubble.textContent = content;
 
   if (sender === "assistant") {
     const avatar = document.createElement("div");
     avatar.className =
-      "avatar-cute w-12 h-12 flex-shrink-0 flex items-center justify-center overflow-hidden";
+      "avatar-cute w-10 h-10 flex-shrink-0 flex items-center justify-center overflow-hidden";
     const img = document.createElement("img");
     img.src = avatarimg
     img.alt = "avatar";
@@ -89,6 +88,7 @@ messageForm.addEventListener("submit", async (e) => {
 
   chatContainer.appendChild(createMessageBubble(message, "user"));
   userInput.value = "";
+  userInput.style.height = "";
   scrollToBottom();
 
   try {

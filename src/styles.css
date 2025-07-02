@@ -40,10 +40,7 @@
   100% { transform: scale(1);}
 }
 
-/* 귀여운 말풍선 꼬리 */
-.bubble-cute-tail {
-  position: relative;
-}
+
 .bubble-cute-tail.user::after {
   content: "";
   position: absolute;
@@ -67,7 +64,6 @@
   z-index: 0;
 }
 
-/* 아바타에 귀여운 그림자와 테두리 */
 .avatar-cute {
   transition: transform 0.2s;
   cursor: pointer;
