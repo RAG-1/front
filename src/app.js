@@ -1,3 +1,5 @@
+import avatarimg from "url:./assets/black-cat.png";
+
 const chatContainer = document.getElementById("chat-container");
 const messageForm = document.getElementById("message-form");
 const userInput = document.getElementById("user-input");
@@ -19,28 +21,32 @@ function createMessageBubble(content, sender = "user") {
   }
 
   const bubble = document.createElement("div");
-  bubble.className = "max-w-full md:max-w-2xl p-3 rounded-lg whitespace-pre-wrap leading-relaxed shadow-sm bubble-appear";
+  bubble.className =
+    "bubble-cute-tail " +
+    (sender === "user" ? "user " : "assistant ") +
+    "max-w-full md:max-w-2xl p-4 rounded-3xl whitespace-pre-wrap leading-relaxed shadow-lg bubble-appear font-semibold text-base";
   if (sender === "user") {
-    bubble.classList.add("bg-gray-200", "text-gray-900", "ml-auto");
+    bubble.classList.add("bg-gray-200", "text-pink-500", "ml-auto");
   } else {
-    bubble.classList.add("bg-pink-600", "text-white");
+    bubble.classList.add("bg-pink-400", "text-white");
   }
   bubble.textContent = content;
 
-if (sender === "assistant") {
-  const avatar = document.createElement("div");
-  avatar.className =
-    "w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold bg-gradient-to-br from-green-400 to-green-600 overflow-hidden";
-  const img = document.createElement("img");
-  img.src = "./src/assets/avatar.jpg";
-  img.alt = "avatar";
-  img.className = "w-full h-full object-cover";
-  avatar.appendChild(img);
-  wrapper.appendChild(avatar);
-  wrapper.appendChild(bubble);
-} else {
-  wrapper.appendChild(bubble);
-}
+  if (sender === "assistant") {
+    const avatar = document.createElement("div");
+    avatar.className =
+      "avatar-cute w-12 h-12 flex-shrink-0 flex items-center justify-center overflow-hidden";
+    const img = document.createElement("img");
+    img.src = avatarimg
+    img.alt = "avatar";
+    img.className = "w-full h-full object-cover";
+    avatar.appendChild(img);
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(bubble);
+  } else {
+    wrapper.appendChild(bubble);
+  }
+
   setTimeout(() => {
     bubble.classList.add("bubble-appear-active");
   }, 10);
@@ -106,4 +112,18 @@ window.addEventListener("DOMContentLoaded", () => {
     createMessageBubble('안녕하세요. 당신의 코드를 트렌드하게 바꿔줄 "델타캐처"입니다!', "assistant")
   );
   scrollToBottom();
+});
+
+const textarea = document.getElementById('user-input');
+
+textarea.addEventListener('input', () => {
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+});
+
+textarea.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    document.getElementById('message-form').requestSubmit();
+  }
 });

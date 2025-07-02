@@ -8,15 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/styles.css" />
 </head>
 
-<body class="h-screen flex flex-col bg-gray-100">
-    <!-- Header -->
+<body class="h-screen flex flex-col bg-gradient-to-br from-pink-100 via-pink-50 to-blue-100 bg-repeat-round" style="background-image: radial-gradient(circle at 20% 20%, #f9a8d4 0%, #fdf2f8 40%, transparent 70%), radial-gradient(circle at 80% 80%, #a7f3d0 0%, #f0fdf4 40%, transparent 70%);">
     <header
-        class="p-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white flex items-center justify-between">
-        <h1 class="text-xl font-semibold">최신 버전 코드 서포트 챗봇</h1>
-        <span class="text-sm opacity-90">RAG 대전 1팀</span>
+        class="p-4 from-pink-100 via-pink-50 to-blue-100 text-white flex items-center justify-between flex-col items-center justify-center">
+        <h1 class="text-3xl font-bold text-white drop-shadow-lg"
+            style="font-family: 'Jua', 'Nanum Gothic', sans-serif; text-shadow: 2px 4px 16px #f472b6, 0 1px 0 #fff;">
+            최신 버전 코드 서포트 챗봇</h1>
+        <span class="text-sm opacity-90 text-gray-500">RAG 대전 1</span>
     </header>
 
     <!-- Main chat area -->
@@ -25,21 +27,22 @@
     </main>
 
     <!-- Input area with endpoint selector -->
-    <footer class="border-t border-gray-300 bg-white p-4">
-        <form id="message-form" class="flex items-center space-x-2">
+    <footer class="border-t border-pink-200 bg-white/80 p-4 rounded-3xl shadow-2xl mx-2 mb-5">
+        <form id="message-form" class="flex items-center gap-3 rounded-2xl px-4 py-2">
             <select id="language-selector"
-            class="h-10 px-3 text-base border border-gray-300 rounded-md focus:border-pink-500 focus:outline-none">
+            class="h-10 px-4 text-base border-2 border-pink-200 rounded-full focus:border-pink-400 focus:outline-none bg-white/80 font-semibold text-pink-600 transition">
             <option value="" disabled selected>---언어를 선택하세요---</option>
             <option value="django">Django</option>
             <option value="python">Python</option>
             <option value="nodejs">Node.js</option>
             </select>
-            <input type="text" id="user-input"
-            class="h-10 flex-1 px-3 text-base border border-gray-300 rounded-md outline-none focus:border-pink-500"
-            placeholder="질문 내용을 입력해주세요." required />
+            <textarea type="text" id="user-input"
+            class="h-10 flex-1 px-4 text-base border-2 border-pink-200 rounded-2xl outline-none focus:border-pink-400 bg-white/80 font-semibold text-pink-600 transition"
+            placeholder="질문 내용을 입력해주세요." required></textarea>
             <button type="submit"
-            class="h-10 px-4 text-base bg-pink-600 text-white rounded-md hover:bg-pink-700 transition">
-            질문하기
+                class="h-10 px-6 text-base bg-pink-400 text-white rounded-full shadow-pink-200 shadow-md hover:bg-pink-500 active:scale-95 transition-all"
+                style="font-family: 'Jua', 'Nanum Gothic', sans-serif;">
+                질문하기
             </button>
         </form>
     </footer>
