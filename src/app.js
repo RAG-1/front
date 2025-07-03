@@ -27,10 +27,11 @@ function createMessageBubble(content, sender = "user") {
     (sender === "user" ? "user " : "assistant ") +
     "max-w-[60%] p-3 rounded-3xl leading-relaxed shadow-lg bubble-appear font-semibold text-base";
   if (sender === "user") {
-    bubble.classList.add("bg-gray-200", "text-pink-500", "ml-auto");
+    bubble.classList.add("bg-gray-200", "text-pink-500", "ml-auto", "whitespace-pre-line");
     bubble.textContent = content;
   } else {
     bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
+
     function cleanMarkdown(content) {
       // 1. 이스케이프된 개행(\\n, \\r\\n)을 실제 개행(\n)으로 변환
       let temp = content.replace(/\\r\\n|\\n/g, '\n');
