@@ -1,5 +1,5 @@
 marked.setOptions({ breaks: true });
-import avatarimg from "url:./assets/black-cat.png";
+import avatarimg from "url:./assets/DeltaCat.png";
 
 const chatContainer = document.getElementById("chat-container");
 const messageForm = document.getElementById("message-form");
@@ -31,7 +31,8 @@ function createMessageBubble(content, sender = "user") {
     bubble.textContent = content;
   } else {
     bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
-    let cleanContent = content.trim()
+    let cleanContent = content.trim();
+    cleanContent = cleanContent.replace(/^[ \t]+/gm, '');
     // cleanContent = cleanContent.replace(/\n/g, '<br>');
     bubble.innerHTML = marked.marked(cleanContent);
   }

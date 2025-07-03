@@ -125,6 +125,8 @@ body {
   padding: 0.25em 0.5em;
   font-family: 'Fira Mono', 'Consolas', monospace;
   font-size: 0.95em;
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 .assistant strong {
   font-weight: bold;
