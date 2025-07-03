@@ -7,6 +7,7 @@ const languageSelector = document.getElementById("language-selector");
 
 // We'll read the API endpoint from an environment variable
 const BASE_URL = process.env.API_ENDPOINT;
+console.log("BASE_URL:", BASE_URL);
 const url = `${BASE_URL}/chat`;
 // This will be replaced at build time by Parcel with the appropriate value
 // from the corresponding .env file.
@@ -94,6 +95,7 @@ messageForm.addEventListener("submit", async (e) => {
   try {
     const response = await getAssistantResponse(message, selectedLanguage);
     chatContainer.appendChild(createMessageBubble(response, "assistant"));
+    console.log("Assistant response:", response);
     scrollToBottom();
   } catch (error) {
     console.error("Error fetching assistant response:", error);
