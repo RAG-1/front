@@ -1,3 +1,4 @@
+marked.setOptions({ breaks: true });
 import avatarimg from "url:./assets/black-cat.png";
 
 const chatContainer = document.getElementById("chat-container");
@@ -30,8 +31,8 @@ function createMessageBubble(content, sender = "user") {
     bubble.textContent = content;
   } else {
     bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
-    let cleanContent = content.replace(/\n+$/, '');
-    cleanContent = cleanContent.replace(/\n/g, '<br>');
+    let cleanContent = content.trim()
+    // cleanContent = cleanContent.replace(/\n/g, '<br>');
     bubble.innerHTML = marked.marked(cleanContent);
   }
     // bubble.textContent = content;
