@@ -1,5 +1,5 @@
 marked.setOptions({ breaks: true });
-import avatarimg from "url:./assets/black-cat.png";
+import avatarimg from "url:./assets/Deltacat.png";
 
 const chatContainer = document.getElementById("chat-container");
 const messageForm = document.getElementById("message-form");
