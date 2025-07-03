@@ -24,13 +24,17 @@ function createMessageBubble(content, sender = "user") {
   const bubble = document.createElement("div");
   bubble.className =
     (sender === "user" ? "user " : "assistant ") +
-    "max-w-[60%] p-3 rounded-3xl whitespace-pre-wrap leading-relaxed shadow-lg bubble-appear font-semibold text-base";
+    "max-w-[60%] p-3 rounded-3xl leading-relaxed shadow-lg bubble-appear font-semibold text-base";
   if (sender === "user") {
     bubble.classList.add("bg-gray-200", "text-pink-500", "ml-auto");
+    bubble.textContent = content;
   } else {
-  bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
+    bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
+    let cleanContent = content.replace(/\n+$/, '');
+    cleanContent = cleanContent.replace(/\n/g, '<br>');
+    bubble.innerHTML = marked.marked(cleanContent);
   }
-  bubble.textContent = content;
+    // bubble.textContent = content;
 
   if (sender === "assistant") {
     const avatar = document.createElement("div");
