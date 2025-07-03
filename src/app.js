@@ -31,10 +31,33 @@ function createMessageBubble(content, sender = "user") {
     bubble.textContent = content;
   } else {
     bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
-    let cleanContent = content.trim();
-    cleanContent = cleanContent.replace(/^[ \t]+/gm, '');
-    // cleanContent = cleanContent.replace(/\n/g, '<br>');
-    cleanContent = cleanContent.replace(/\\n|\\r\\n/g, '\n');
+    function cleanMarkdown(content) {
+      // 1. 이스케이프된 개행(\\n, \\r\\n)을 실제 개행(\n)으로 변환
+      let temp = content.replace(/\\r\\n|\\n/g, '\n');
+
+      // 2. 코드블록을 임시로 치환
+      const codeBlocks = [];
+      const codeBlockPattern = /``````/g;
+      temp = temp.replace(codeBlockPattern, (match) => {
+        codeBlocks.push(match);
+        return `__CODEBLOCK_${codeBlocks.length - 1}__`;
+      });
+
+      // 3. 코드블록이 아닌 부분의 각 줄 맨 앞 한 칸 공백 제거
+      temp = temp.replace(/^[ \t]/gm, '');
+
+      // 4. 코드블록을 다시 원래 위치에 복원
+      temp = temp.replace(/__CODEBLOCK_(\d+)__/g, (_, idx) => codeBlocks[idx]);
+
+      return temp.trim();
+    }
+
+    // let cleanContent = content.trim();
+    // cleanContent = cleanContent.replace(/^[ \t]+/gm, '');
+    // // cleanContent = cleanContent.replace(/\n/g, '<br>');
+    // cleanContent = cleanContent.replace(/\\n|\\r\\n/g, '\n');
+    let cleanContent = cleanMarkdown(content);
+    // cleanContent = content.replace(/\\n|\\r\\n|\n/g, '');
     bubble.innerHTML = marked.marked(cleanContent);
   }
     // bubble.textContent = content;
