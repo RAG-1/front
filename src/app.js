@@ -34,6 +34,7 @@ function createMessageBubble(content, sender = "user") {
     let cleanContent = content.trim();
     cleanContent = cleanContent.replace(/^[ \t]+/gm, '');
     // cleanContent = cleanContent.replace(/\n/g, '<br>');
+    cleanContent = cleanContent.replace(/\\n|\\r\\n/g, '\n');
     bubble.innerHTML = marked.marked(cleanContent);
   }
     // bubble.textContent = content;
