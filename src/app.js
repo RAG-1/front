@@ -64,7 +64,7 @@ async function getAssistantResponse(userMessage, codeLanguage) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      message: userMessage,
+      query: userMessage,
       language: codeLanguage,
     }),  });
 
