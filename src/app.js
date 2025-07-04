@@ -1,4 +1,6 @@
+// 마크다운 파서 옵션: 한 줄 개행도 줄바꿈으로 보이게 설정
 marked.setOptions({ breaks: true });
+
 import avatarimg from "url:./assets/DeltaCat.png";
 
 const chatContainer = document.getElementById("chat-container");
@@ -6,12 +8,11 @@ const messageForm = document.getElementById("message-form");
 const userInput = document.getElementById("user-input");
 const languageSelector = document.getElementById("language-selector");
 
-// We'll read the API endpoint from an environment variable
+// 환경변수에서 API 엔드포인트 읽기
 const BASE_URL = process.env.API_ENDPOINT;
 console.log("BASE_URL:", BASE_URL);
 const url = `${BASE_URL}/chat`;
-// This will be replaced at build time by Parcel with the appropriate value
-// from the corresponding .env file.
+
 
 function createMessageBubble(content, sender = "user") {
   const wrapper = document.createElement("div");
@@ -33,36 +34,25 @@ function createMessageBubble(content, sender = "user") {
     bubble.classList.add("bg-pink-400", "md:max-w-2xl", "text-white");
 
     function cleanMarkdown(content) {
-      // 1. 이스케이프된 개행(\\n, \\r\\n)을 실제 개행(\n)으로 변환
       let temp = content.replace(/\\r\\n|\\n/g, '\n');
-
-      // 2. 코드블록을 임시로 치환
       const codeBlocks = [];
       const codeBlockPattern = /``````/g;
       temp = temp.replace(codeBlockPattern, (match) => {
         codeBlocks.push(match);
         return `__CODEBLOCK_${codeBlocks.length - 1}__`;
       });
-
-      // 3. 코드블록이 아닌 부분의 각 줄 맨 앞 한 칸 공백 제거
       temp = temp.replace(/^[ \t]/gm, '');
-
-      // 4. 코드블록을 다시 원래 위치에 복원
       temp = temp.replace(/__CODEBLOCK_(\d+)__/g, (_, idx) => codeBlocks[idx]);
 
       return temp.trim();
     }
 
-    // let cleanContent = content.trim();
-    // cleanContent = cleanContent.replace(/^[ \t]+/gm, '');
-    // // cleanContent = cleanContent.replace(/\n/g, '<br>');
-    // cleanContent = cleanContent.replace(/\\n|\\r\\n/g, '\n');
+    // assistant 메시지: 마크다운 파싱 및 스타일 적용
     let cleanContent = cleanMarkdown(content);
-    // cleanContent = content.replace(/\\n|\\r\\n|\n/g, '');
     bubble.innerHTML = marked.marked(cleanContent);
   }
-    // bubble.textContent = content;
 
+  // assistant 메시지에 아바타(고양이) 추가
   if (sender === "assistant") {
     const avatar = document.createElement("div");
     avatar.className =
@@ -78,6 +68,7 @@ function createMessageBubble(content, sender = "user") {
     wrapper.appendChild(bubble);
   }
 
+  // 버블 애니메이션 효과
   setTimeout(() => {
     bubble.classList.add("bubble-appear-active");
   }, 10);
@@ -85,10 +76,12 @@ function createMessageBubble(content, sender = "user") {
   return wrapper;
 }
 
+// 채팅창을 항상 최신 메시지로 스크롤
 function scrollToBottom() {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
+// 백엔드에 질문을 보내고 assistant 응답을 받아오는 함수
 async function getAssistantResponse(userMessage, codeLanguage) {
   const response = await fetch(url, {
     method: "POST",
@@ -108,6 +101,7 @@ async function getAssistantResponse(userMessage, codeLanguage) {
   return data.reply;
 }
 
+// 메시지 전송 이벤트 핸들러
 messageForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const message = userInput.value.trim();
@@ -140,6 +134,7 @@ messageForm.addEventListener("submit", async (e) => {
   }
 });
 
+// 페이지 로드시 첫인사 메시지 출력
 window.addEventListener("DOMContentLoaded", () => {
   chatContainer.appendChild(
     createMessageBubble('안녕하세요. 당신의 코드를 트렌드하게 바꿔줄 "델타캐처"입니다!', "assistant")
@@ -147,6 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
   scrollToBottom();
 });
 
+// 입력창 자동 높이 조절 및 엔터 입력 처리
 const textarea = document.getElementById('user-input');
 
 textarea.addEventListener('input', () => {

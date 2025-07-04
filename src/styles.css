@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar (optional) */
+/* 채팅 스크롤바 스타일 */
 .chat-scroll::-webkit-scrollbar {
   width: 6px;
 }
@@ -14,6 +14,7 @@
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
+/* 말풍선 등장 애니메이션 */
 .bubble-appear {
   opacity: 0;
   transform: translateY(30px);
@@ -40,30 +41,7 @@
   100% { transform: scale(1);}
 }
 
-
-.bubble-cute-tail.user::after {
-  content: "";
-  position: absolute;
-  right: -12px;
-  bottom: 8px;
-  width: 18px;
-  height: 18px;
-  background: #d1d5db; /* gray-200 */
-  border-radius: 50%;
-  z-index: 0;
-}
-.bubble-cute-tail.assistant::after {
-  content: "";
-  position: absolute;
-  left: -12px;
-  bottom: 8px;
-  width: 18px;
-  height: 18px;
-  background: #f472b6; /* pink-400 */
-  border-radius: 50%;
-  z-index: 0;
-}
-
+/* 아바타(고양이) 효과 */
 .avatar-cute {
   margin-right: 0.5rem;
   transition: transform 0.2s;
@@ -95,6 +73,7 @@ body {
   );
 }
 
+/* 입력창 최대 높이 제한 */
 #user-input {
   max-height: 300px;
   overflow-y: auto;
@@ -130,18 +109,15 @@ body {
 }
 .assistant strong {
   font-weight: bold;
-  /* color: #be185d; */
 }
 .assistant em {
   font-style: italic;
-  /* color: #6366f1; */
 }
 
+/* 말풍선 기본 스타일 */
 .assistant, .user {
   font-weight: lighter;
   word-break: break-word;
   overflow-wrap: break-word;
-  /* white-space: pre-line; 줄바꿈 문자(\n)도 반영 */
-  /* white-space: pre-wrap; */
   overflow-x: auto; 
 }
